@@ -1,68 +1,17 @@
-<section class="container mx-auto my-3 max-w-md">
-  <h2 class="text-2xl font-bold capitalize tracking-wide mb-2">
-    Expense Tracker
-  </h2>
-  <h3 class="text-xl uppercase mb-0.5">Your balance</h3>
+<section class="my-3 w-full max-h-full">
+  <expence-tracker-header></expence-tracker-header>
 
-  <p class="text-4xl font-semibold mb-2">
-    {{ expenseTracker.balance() > 0 ? "+" : ""
-    }}{{ expenseTracker.balance() | currency }}
-  </p>
+  <expense-tracker-balance></expense-tracker-balance>
 
-  <div
-    class="my-3 mx-1 py-3 px-2 columns-2 divide-x-2 text-center bg-slate-100">
-    <div>
-      <h4 class="text-lg uppercase">Income</h4>
-      <p>+{{ expenseTracker.income() | currency }}</p>
-    </div>
-    <div>
-      <h4 class="text-lg uppercase">Expense</h4>
-      <p>-{{ expenseTracker.expense() | currency }}</p>
-    </div>
-  </div>
+  @if (showIncomeExpense) {
+    <expense-tracker-income-expense></expense-tracker-income-expense>
+  }
 
-  <div class="mb-1">
-    <h3 class="text-xl capitalize mb-2">History</h3>
-    @for (transaction of expenseTracker.transactions(); track transaction.id) {
-      <app-transaction
-        class="mb-1"
-        [transaction]="transaction"></app-transaction>
-    } @empty {
-      <p>There is no transaction yet.</p>
-    }
-  </div>
+  @if (showTransactionHistory) {
+    <expense-tracker-transaction-history></expense-tracker-transaction-history>
+  }
 
-  <div>
-    <h3 class="text-xl capitalize mb-2">Add new transaction</h3>
-    <form
-      class="flex flex-col my-3 mx-1 py-3 px-2 bg-slate-100"
-      [formGroup]="newTransactionForm"
-      (ngSubmit)="onNewTransactionSubmit()">
-      <label class="mb-0.5" for="label">Text</label>
-      <input
-        class="border rounded py-0.5 px-1"
-        id="label"
-        type="text"
-        name="label"
-        placeholder="Enter text..."
-        formControlName="label" />
-      <br />
-
-      <label class="mb-0.5" for="amount">Amount</label>
-      <input
-        class="border rounded py-0.5 px-1"
-        id="amount"
-        type="number"
-        name="amount"
-        placeholder="Enter amount..."
-        formControlName="amount" />
-      <br />
-
-      <input
-        class="bg-sky-500 hover:bg-sky-700 disabled:bg-slate-600 hover:disabled:bg-slate-600 px-3 py-1 rounded-full text-slate-100"
-        type="submit"
-        value="Add transaction"
-        [disabled]="!newTransactionForm.valid" />
-    </form>
-  </div>
+  @if (showAddTransaction) {
+    <expense-tracker-add-transaction></expense-tracker-add-transaction>
+  }
 </section>

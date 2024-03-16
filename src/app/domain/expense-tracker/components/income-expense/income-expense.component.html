@@ -1,0 +1,10 @@
+<div class="my-3 py-3 px-2 columns-2 divide-x-2 text-center bg-slate-100">
+  <div>
+    <h4 class="text-lg uppercase">Income</h4>
+    <p class="text-green-600">+{{ expenseTracker.income() | currency }}</p>
+  </div>
+  <div>
+    <h4 class="text-lg uppercase">Expense</h4>
+    <p class="text-red-600">-{{ expenseTracker.expense() | currency }}</p>
+  </div>
+</div>

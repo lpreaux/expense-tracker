@@ -1,68 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { ExpenseTrackerService } from "./expense-tracker.service";
-import { CurrencyPipe, DecimalPipe, JsonPipe } from "@angular/common";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from "@angular/forms";
-import { Transaction } from "./models/transaction";
-import { ExpenseTrackerModule } from "./expense-tracker.module";
+import { booleanAttribute, Component, Input } from "@angular/core";
 
-interface NewTransactionForm {
-  label: FormControl<string>;
-  amount: FormControl<number>;
-}
-
-interface NewTransactionFormValue {
-  label: string;
-  amount: number;
-}
-const formValueToTransaction = (
-  formValue: NewTransactionFormValue
-): Partial<Transaction> => {
-  return {
-    label: formValue.label,
-    type: formValue.amount < 0 ? "EXPENSE" : "INCOME",
-    amount: Math.abs(formValue.amount),
-  };
-};
 @Component({
+  styles: `
+    :host {
+      @apply block mx-auto max-w-md my-1 px-2;
+    }
+  `,
   selector: "app-expense-tracker",
-  standalone: true,
-  imports: [
-    JsonPipe,
-    CurrencyPipe,
-    DecimalPipe,
-    ReactiveFormsModule,
-    ExpenseTrackerModule,
-  ],
-  providers: [ExpenseTrackerService],
+  standalone: false,
   templateUrl: "./expense-tracker.component.html",
 })
-export class ExpenseTrackerComponent implements OnInit {
-  newTransactionForm!: FormGroup<NewTransactionForm>;
-
-  constructor(
-    protected expenseTracker: ExpenseTrackerService,
-    private formBuilder: FormBuilder
-  ) {}
-
-  ngOnInit() {
-    this.newTransactionForm = this.formBuilder.nonNullable.group({
-      label: ["", Validators.required],
-      amount: [0, Validators.required],
-    });
-  }
-
-  onNewTransactionSubmit() {
-    this.expenseTracker.addTransaction(
-      formValueToTransaction(
-        this.newTransactionForm.value as NewTransactionFormValue
-      )
-    );
-    this.newTransactionForm.reset();
-  }
+export class ExpenseTrackerComponent {
+  @Input({ transform: booleanAttribute }) showIncomeExpense: boolean = false;
+  @Input({ transform: booleanAttribute }) showTransactionHistory: boolean =
+    false;
+  @Input({ transform: booleanAttribute }) showAddTransaction: boolean = false;
 }

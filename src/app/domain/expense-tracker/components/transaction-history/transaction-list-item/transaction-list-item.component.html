@@ -1,4 +1,4 @@
-<div class="my-3 mx-1 py-3 px-2 flex justify-between bg-slate-100">
+<div [class]="getCardClass()">
   <p>{{ transaction.label }}</p>
   <p>
     {{ transaction.type === "EXPENSE" ? "-" : "+"

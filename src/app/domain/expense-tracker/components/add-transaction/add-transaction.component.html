@@ -1,0 +1,9 @@
+<div class="mb-3 py-3 px-2 bg-slate-100">
+  <header class="border-b border-slate-900 mb-2">
+    <h3 class="text-xl capitalize">Add new transaction</h3>
+  </header>
+  <expense-tracker-new-transaction-form
+    (transactionSubmitted)="
+      saveNewTransaction($event)
+    "></expense-tracker-new-transaction-form>
+</div>

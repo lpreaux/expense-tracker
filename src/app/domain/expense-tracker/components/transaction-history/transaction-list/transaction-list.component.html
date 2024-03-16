@@ -1,0 +1,10 @@
+<ul class="flex gap-1 flex-col overflow-y-auto">
+  @for (transaction of expenseTracker.transactions(); track transaction.id) {
+    <li>
+      <expense-tracker-transaction-list-item
+        [transaction]="transaction"></expense-tracker-transaction-list-item>
+    </li>
+  } @empty {
+    <p class="italic">No transaction yet.</p>
+  }
+</ul>

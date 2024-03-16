@@ -1,0 +1,6 @@
+<h3 class="text-xl uppercase mb-0.5">Your balance</h3>
+
+<p class="text-4xl font-semibold mb-2">
+  {{ expenseTracker.balance() > 0 ? "+" : ""
+  }}{{ expenseTracker.balance() | currency }}
+</p>
