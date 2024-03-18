@@ -1,3 +1,6 @@
+@import 'overlayscrollbars/styles/overlayscrollbars.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+

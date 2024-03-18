@@ -9,8 +9,9 @@ import { BalanceComponent } from "./components/balance/balance.component";
 import { IncomeExpenseComponent } from "./components/income-expense/income-expense.component";
 import { TransactionHistoryComponent } from "./components/transaction-history/transaction-history.component";
 import { AddTransactionComponent } from "./components/add-transaction/add-transaction.component";
-import { TransactionListComponent } from './components/transaction-history/transaction-list/transaction-list.component';
-import { NewTransactionFormComponent } from './components/add-transaction/new-transaction-form/new-transaction-form.component';
+import { TransactionListComponent } from "./components/transaction-history/transaction-list/transaction-list.component";
+import { NewTransactionFormComponent } from "./components/add-transaction/new-transaction-form/new-transaction-form.component";
+import { OverlayscrollbarsModule } from "overlayscrollbars-ngx";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { NewTransactionFormComponent } from './components/add-transaction/new-tr
     TransactionListComponent,
     NewTransactionFormComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, OverlayscrollbarsModule],
   providers: [ExpenseTrackerService],
   exports: [ExpenseTrackerComponent],
 })

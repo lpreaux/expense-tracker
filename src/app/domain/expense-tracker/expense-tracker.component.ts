@@ -1,7 +1,14 @@
-import { booleanAttribute, Component, Input, OnInit } from "@angular/core";
+import {
+  booleanAttribute,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { ExpenseTrackerService } from "./expense-tracker.service";
 import { IndexedDbService } from "../../db/indexed-db.service";
 import { first } from "rxjs";
+import { OverlayScrollbarsDirective } from "overlayscrollbars-ngx";
 
 @Component({
   styles: `

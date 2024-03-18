@@ -4,6 +4,10 @@
   </header>
   <div class="flex-grow flex flex-col min-h-0">
     <expense-tracker-transaction-list
-      class="flex-1 overflow-y-auto overscroll-none"></expense-tracker-transaction-list>
+      #transactionListComponent
+      overlayScrollbars
+      class="flex-1 overflow-y-auto overscroll-none"
+      [options]="scrollOptions"
+      [defer]="true"></expense-tracker-transaction-list>
   </div>
 </div>
