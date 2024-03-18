@@ -6,7 +6,7 @@ import { first } from "rxjs";
 @Component({
   styles: `
     :host {
-      @apply block mx-auto max-w-md my-1 px-2;
+      @apply block w-full h-full;
     }
   `,
   selector: "app-expense-tracker",

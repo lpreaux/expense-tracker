@@ -1,4 +1,4 @@
-<section class="my-3 w-full max-h-full">
+<section class="w-auto h-full flex flex-col gap-3">
   <expence-tracker-header></expence-tracker-header>
 
   <expense-tracker-balance></expense-tracker-balance>
@@ -8,7 +8,8 @@
   }
 
   @if (showTransactionHistory) {
-    <expense-tracker-transaction-history></expense-tracker-transaction-history>
+    <expense-tracker-transaction-history
+      class="flex-shrink min-h-[168px]"></expense-tracker-transaction-history>
   }
 
   @if (showAddTransaction) {

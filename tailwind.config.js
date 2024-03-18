@@ -2,7 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        "inherit": "inherit",
+      },
+      maxHeight: {
+        "inherit": "inherit",
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
