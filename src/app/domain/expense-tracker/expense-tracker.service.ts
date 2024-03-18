@@ -1,6 +1,7 @@
 import { computed, Injectable, signal, WritableSignal } from "@angular/core";
 import { Transaction } from "./models/transaction";
 import _ from "lodash";
+import { TransactionDaoService } from "./dal/transaction-dao.service";
 
 @Injectable()
 export class ExpenseTrackerService {
@@ -38,22 +39,27 @@ export class ExpenseTrackerService {
       }, 0)
   );
 
-  constructor() {}
+  constructor(private transactionDao: TransactionDaoService) {}
 
-  addTransaction(transactionData: Partial<Transaction>) {
-    let transaction = {
-      id: this.getLastId() + 1,
-    } as Transaction;
-    transaction = Object.assign(transaction, transactionData);
-    this.transactions.update(transactions => {
-      return [...transactions, transaction];
-    });
+  updateTransactions() {
+    this.transactionDao.findAll().subscribe(this.transactions.set);
   }
 
-  private getLastId() {
-    const initalId = 0;
-    return this.transactions()
-      .map(transaction => transaction.id)
-      .reduce((acc, id) => (acc >= id ? acc : id), initalId);
+  addTransaction(transactionData: Partial<Transaction>) {
+    if (typeof transactionData.label != "string")
+      throw "label should not be undefined";
+    if (transactionData.type != "INCOME" && transactionData.type != "EXPENSE")
+      throw "type should be equal to 'INCOME' or 'EXPENSE'";
+    if (typeof transactionData.amount != "number")
+      throw "amount should be a number";
+
+    const transaction: Omit<Transaction, "id"> = {
+      label: transactionData.label,
+      type: transactionData.type,
+      amount: transactionData.amount,
+    };
+    this.transactionDao
+      .createOne(transaction)
+      .subscribe(() => this.updateTransactions());
   }
 }
